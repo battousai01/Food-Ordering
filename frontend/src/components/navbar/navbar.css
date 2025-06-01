@@ -64,19 +64,27 @@
 .dropdown-menu{
     display: none;
     position: absolute;
-    top: 20px;
-    right: -30px;
-    background-color: #fff;
-    border: 1px solid lightgray;
+    top:  -15px;
+    right: -50px;
+    background-color: none;
+    border: none;
     border-radius: 5px;
     width: 130px;
     font-size: 18px;
     padding: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+    transition: opacity 0.15s;
 }
 .profile-group:hover .dropdown-menu{
     display: block;
+    
 }
+/*.profile-group:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+    opacity: 1;
+}*/
+
 .dropdown-item{
     color: gray;
     cursor: pointer;

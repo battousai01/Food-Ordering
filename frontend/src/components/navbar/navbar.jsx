@@ -1,23 +1,35 @@
-import React, {useContext}from 'react'
+import React, {useContext, useState}from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import './navbar.css'
 import {BiUser } from 'react-icons/bi';
 import {BsCart} from 'react-icons/bs'
 import { FoodContext } from '../../context/Foodcontext.jsx';
-
+import { FaCentos } from 'react-icons/fa';
 
 const Navbar = () => {
 
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
-  const {getCartCount} = useContext(FoodContext);
+  const { getCartCount, logout } = useContext(FoodContext);
+
+  const handleNavigation = (path) => {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false)
+      },2000)
+      navigate(path)
+  }
+
+
   return (
     
     <div>
       <nav className="navbar">
         <div>
           <Link to="/">
-          <h2>FoodSpot</h2>
+          <h2>FoodShop</h2>
           </Link>
         </div>
         <div className='search-bar'>
@@ -31,7 +43,7 @@ const Navbar = () => {
             <div className="dropdown-menu">
               <Link to="/login"><p className='dropdown-item'>Login/Sign Up</p></Link>
               <Link to="/orders"><p className='dropdown-item'>Orders</p></Link>
-              <p className='dropdown-item'>Logout</p>
+              <p onClick={logout} className='dropdown-item'>Logout</p>
             </div>
           </div>      
         

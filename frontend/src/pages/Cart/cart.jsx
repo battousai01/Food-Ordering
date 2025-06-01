@@ -18,10 +18,12 @@ const cart = () => {
       return;  
     }
 
-    const tempData = Object.entries(cartItems).filter(([,quantity]) => quantity > 0).map(([itemId,quantity]) => ({
-      _id: itemId,
-      quantity
-    }));
+    const tempData = Object.entries(cartItems)
+      .filter(([,quantity]) => quantity > 0)
+      .map(([itemId,quantity]) => ({
+        productId: Number(itemId),
+        quantity
+      }));
 
     setCartData(tempData)
   },[cartItems, products])
@@ -34,7 +36,7 @@ const cart = () => {
       <div className='cart-content-container'>
         {
           cartData.map((item,index) => {
-            const productData = products.find((product) => product._id === item._id)
+            const productData = products.find((product) => product.id === item.productId)
             if(!productData) {
               return null;
             }
@@ -47,10 +49,19 @@ const cart = () => {
                     <p className="cart-product-price">{currency} {productData.price}</p>
                   </div>
                 </div>
-                <input type = "number" min={1} defaultValue={item.quantity} className='quantity-input' 
-                onChange={(e) => e.target.value === "" || e.target.value === "0" ? null : updateQuantity(item._id,Number(e.target.value))} />
+                <input
+                  type="number"
+                  min={1}
+                  value={item.quantity}
+                  className='quantity-input'
+                  onChange={e =>
+                    e.target.value === "" || e.target.value === "0"
+                      ? null
+                      : updateQuantity(item.productId, Number(e.target.value))
+                  }
+                />
 
-                <MdDelete className='delete-icon' onClick={() => updateQuantity(item._id, 0)}/>
+                <MdDelete className='delete-icon' onClick={() => updateQuantity(item.productId, 0)} />
               </div> 
             )      
           })
