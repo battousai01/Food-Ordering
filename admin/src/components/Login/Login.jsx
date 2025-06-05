@@ -11,6 +11,7 @@ const Login = ({setToken}) => {
   const OnSubmitHandler = async(e) => {
     try{
       e.preventDefault()
+      console.log("backendUrl in production:", backendUrl); // log for debugging admin login
 
       const response = await axios.post(backendUrl + '/api/user/admin', {email,password})
       console.log(response)
